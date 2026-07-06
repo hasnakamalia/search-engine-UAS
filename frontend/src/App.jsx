@@ -17,7 +17,7 @@ export default function App() {
   const [error, setError] = useState(null);
 
   const filter = CALORIE_FILTERS[activeFilter];
-
+  const URL = import.meta.env.VITE_URL_API;
   useEffect(() => {
     const controller = new AbortController();
     const timeout = setTimeout(async () => {
@@ -28,10 +28,10 @@ export default function App() {
         if (filter.min !== null) params.set('minCalories', filter.min);
         if (filter.max !== null) params.set('maxCalories', filter.max);
 
-        const res = await fetch(`/api/search?${params.toString()}`, {
+        const res = await fetch(`${URL}${params.toString()}`, {
           signal: controller.signal,
         });
-        if (!res.ok) throw new Error('Gagal mengambil data dari server');
+        if (!res.ok) throw new Error('Gagal mengambil dimata dari server');
         const data = await res.json();
         setResults(data.hits || []);
         setEstimatedTotal(data.estimatedTotalHits ?? data.hits?.length ?? 0);
@@ -61,7 +61,7 @@ export default function App() {
           <h1>
             Cari kandungan gizi
             <br />
-            bahan pangan apapun.
+            bahan pangan, buah apapun.
           </h1>
           <div className="search-bar">
             <input
