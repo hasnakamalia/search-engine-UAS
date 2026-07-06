@@ -7,7 +7,7 @@ const app = express();
 app.use(
   cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    origin: 'https://uas-hasna.vercel.app/',
+    origin: 'https://uas-hasna.vercel.ap',
   }),
 );
 app.use(express.json());
